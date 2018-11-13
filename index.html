@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>World Wide</title>
+      <style media="screen">
+        #map{
+        height: 400px;
+        width: 100%;
+        }
+
+        #legend{width: 10px;
+        height: 10px;}
+      </style>
+  </head>
+<body>
+
+    <h1>World Wide Ways</h1>
+    <div id="map">
+       let
+    </div>
+
+    <script type="text/javascript">
+
+       function initMap(){
+        let map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 33, lng: 65},
+          zoom: 8
+        });
+
+
+
+        fetch('https://restcountries.eu/rest/v2/all')
+        .then(res => res.json())
+        .then(function(json){
+          json.forEach(function(country){
+            //Adding Marker
+            let marker = new google.maps.Marker({
+              position:{lat: country["latlng"][0] ,lng: country["latlng"][1] },
+              map:map,
+              //size: new google.maps.Size(2, 3),
+              // icon: `${country["flag"]}`
+              content: `<h1>${country["name"]}<h1>`
+
+            });
+             //console.log(country["latlng"][0])
+            //Added Marker?
+            marker.addListener('click', function() {
+            content.open(map, marker);})
+
+
+
+          }
+        )
+
+      })
+    }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFPPtZANXaxQ20FvNyMEV4pEaF9q0bUPE&callback=initMap"
+        async defer></script>
+
+        <script type="text/javascript">
+
+      </script>
+
+</body>
+</html>
